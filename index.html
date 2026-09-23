@@ -6,6 +6,7 @@
 <title>ridgeway goods</title>
 <meta name="description" content="ridgeway goods is an independent apparel company based in Charlotte, North Carolina, and the home of Smashing Apparel.">
 <meta name="theme-color" content="#000000">
+<meta name="format-detection" content="telephone=no, email=no, address=no">
 <meta property="og:title" content="ridgeway goods">
 <meta property="og:description" content="Independent apparel company. Charlotte, North Carolina.">
 <meta property="og:type" content="website">
@@ -175,7 +176,6 @@
     border-bottom: 4px solid var(--ink);
     padding-bottom: 6px;
   }
-  .mail:hover, .mail:focus-visible { background: var(--ink); color: var(--paper); outline: none; }
   .details {
     margin-top: clamp(40px, 6vw, 88px);
     display: grid;
@@ -184,7 +184,6 @@
   }
   .details dt { margin-bottom: 8px; }
   .details dd { margin: 0; font-size: 15px; }
-  .details a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 
   /* Footer */
   footer { border-top: var(--rule); }
@@ -327,7 +326,7 @@
     <div class="grid">
       <div class="label caps"><span class="n">03</span><span>Contact</span></div>
       <div class="body">
-        <a class="mail" href="mailto:help@ridgeway-goods.com">help@ridgeway-goods.com</a>
+        <span class="mail">help@ridgeway-goods.com</span>
         <dl class="details">
           <div>
             <dt class="caps">General</dt>
@@ -335,7 +334,7 @@
           </div>
           <div>
             <dt class="caps">Orders</dt>
-            <dd>For a brand order, contact that brand directly: <a href="mailto:help@smashingapparel.com">help@smashingapparel.com</a></dd>
+            <dd>For a brand order, contact that brand directly: help@smashingapparel.com</dd>
           </div>
           <div>
             <dt class="caps">Location</dt>

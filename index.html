@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ridgeway Goods</title>
-<meta name="description" content="Ridgeway Goods is an independent apparel company based in Charlotte, North Carolina, and the home of Smashing Apparel.">
+<title>ridgeway goods</title>
+<meta name="description" content="ridgeway goods is an independent apparel company based in Charlotte, North Carolina, and the home of Smashing Apparel.">
 <meta name="theme-color" content="#000000">
-<meta property="og:title" content="Ridgeway Goods">
+<meta property="og:title" content="ridgeway goods">
 <meta property="og:description" content="Independent apparel company. Charlotte, North Carolina.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ridgeway-goods.com/">
@@ -57,6 +57,16 @@
   .top .what  { grid-column: 4 / span 3; }
   .top .where { grid-column: 7 / span 3; }
   .top nav    { grid-column: 10 / span 3; display: flex; gap: 18px; justify-content: flex-end; }
+  .clock { display: inline; margin-left: 10px; white-space: nowrap; } /* inline so the time shares the header's text baseline */
+  #clock { font-variant-numeric: tabular-nums; }
+  .sky { display: inline-block; width: 15px; height: 15px; margin-right: 6px; vertical-align: -0.28em; overflow: visible; } /* icon centred on the cap height */
+  .sky * { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; }
+  .sky .solid { fill: var(--ink); stroke: none; }
+  .sky g { display: none; }
+  .sky[data-phase="sunrise"] .p-sunrise,
+  .sky[data-phase="day"] .p-day,
+  .sky[data-phase="sunset"] .p-sunset,
+  .sky[data-phase="night"] .p-night { display: inline; }
   .top nav a:hover, .top nav a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
 
   /* Hero */
@@ -69,8 +79,10 @@
     line-height: 0.82;
     letter-spacing: -0.065em;
     margin-left: -0.04em;
+    padding-bottom: 0.2em; /* room for the g descender in lowercase */
   }
-  .hero h1 span { display: block; width: max-content; }
+  .hero h1 > span { display: block; width: max-content; }
+  .hero h1 .kern-ri { letter-spacing: -0.01em; } /* opens the r-i pair against the tight tracking */
   .hero .under {
     border-top: 6px solid var(--ink);
     margin-top: clamp(24px, 3vw, 44px);
@@ -219,9 +231,30 @@
 <body>
 
 <header class="top grid meta" id="top">
-  <a class="brand" href="#top">Ridgeway Goods</a>
+  <a class="brand" href="#top">ridgeway goods</a>
   <span class="what">Independent apparel company</span>
-  <span class="where">Charlotte, NC <span id="clock" aria-label="Local time in Charlotte"></span></span>
+  <span class="where">Charlotte, NC
+    <span class="clock" aria-label="Local time in Charlotte">
+      <svg class="sky" id="sky" viewBox="0 0 20 20" data-phase="day" role="img" aria-label="Daytime in Charlotte">
+        <g class="p-day">
+          <circle cx="10" cy="10" r="3.6"/>
+          <path d="M10 1.5v2.6M10 15.9v2.6M1.5 10h2.6M15.9 10h2.6M4 4l1.8 1.8M14.2 14.2L16 16M16 4l-1.8 1.8M5.8 14.2L4 16"/>
+        </g>
+        <g class="p-sunrise">
+          <path d="M1.5 13.5h17M5.6 13.5a4.4 4.4 0 0 1 8.8 0M10 3.6v2.4M3.9 7.4l1.6 1.6M16.1 7.4l-1.6 1.6"/>
+          <path d="M7.6 18.5l2.4-2.4 2.4 2.4"/>
+        </g>
+        <g class="p-sunset">
+          <path d="M1.5 13.5h17M5.6 13.5a4.4 4.4 0 0 1 8.8 0M10 3.6v2.4M3.9 7.4l1.6 1.6M16.1 7.4l-1.6 1.6"/>
+          <path d="M7.6 16.1l2.4 2.4 2.4-2.4"/>
+        </g>
+        <g class="p-night">
+          <path class="solid" d="M12.2 2.2A8 8 0 1 0 17.8 13.4 6.3 6.3 0 0 1 12.2 2.2Z"/>
+        </g>
+      </svg>
+      <span id="clock"></span>
+    </span>
+  </span>
   <nav aria-label="Sections">
     <a href="#about">About</a>
     <a href="#brands">Brands</a>
@@ -232,7 +265,7 @@
 <main>
   <section class="hero" aria-label="Introduction">
     <div class="grid">
-      <h1><span>Ridgeway</span><span>Goods</span></h1>
+      <h1 aria-label="ridgeway goods"><span><span class="kern-ri">r</span>idgeway</span><span>goods</span></h1>
     </div>
     <div class="grid under">
       <div class="idx meta">
@@ -247,7 +280,7 @@
     <div class="grid">
       <div class="label caps"><span class="n">01</span><span>About</span></div>
       <div class="body">
-        <p class="statement">Ridgeway Goods is a small apparel company based in Charlotte, North Carolina. We make brands with a point of view and hold every one of them to the same standard.</p>
+        <p class="statement">ridgeway goods is a small apparel company based in Charlotte, North Carolina. We make brands with a point of view and hold every one of them to the same standard.</p>
         <div class="about-cols">
           <div>
             <h3 class="caps">The standard</h3>
@@ -298,11 +331,11 @@
           </div>
           <div>
             <dt class="caps">Orders</dt>
-            <dd>For a brand order, contact that brand directly: <a href="mailto:hi@smashingapparel.com">hi@smashingapparel.com</a></dd>
+            <dd>For a brand order, contact that brand directly: <a href="mailto:help@smashingapparel.com">help@smashingapparel.com</a></dd>
           </div>
           <div>
             <dt class="caps">Location</dt>
-            <dd>Charlotte, North Carolina<br>United States</dd>
+            <dd>Charlotte, North Carolina<br>United States of America</dd>
           </div>
         </dl>
       </div>
@@ -323,11 +356,66 @@
     var y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
     var el = document.getElementById('clock');
+    var sky = document.getElementById('sky');
+    var wrap = el && el.parentNode;
     if (!el || !window.Intl) return;
-    var fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: false });
-    function tick() { el.textContent = '  ' + fmt.format(new Date()); }
+    var TZ = 'America/New_York', LAT = 35.2271, LNG = -80.8431;
+    // Charlotte time, whatever the visitor's own time zone
+    var parts = new Intl.DateTimeFormat('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: false });
+    var short = new Intl.DateTimeFormat('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit', hour12: true });
+
+    // Sun times for Charlotte (NOAA / USNO method, accurate to about a minute).
+    // Official sunrise and sunset: sun's centre 0.833 degrees below the horizon. Civil twilight: 6 degrees.
+    var R = Math.PI / 180, DAY = 864e5, J1970 = 2440588, J2000 = 2451545, J0 = 0.0009, OBL = R * 23.4397;
+    function sunTimes(date) {
+      var lw = R * -LNG, phi = R * LAT;
+      var d = date.valueOf() / DAY - 0.5 + J1970 - J2000;
+      var n = Math.round(d - J0 - lw / (2 * Math.PI));
+      var ds = J0 + lw / (2 * Math.PI) + n;
+      var M = R * (357.5291 + 0.98560028 * ds);
+      var C = R * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M));
+      var L = M + C + R * 102.9372 + Math.PI;
+      var dec = Math.asin(Math.sin(OBL) * Math.sin(L));
+      var noon = J2000 + ds + 0.0053 * Math.sin(M) - 0.0069 * Math.sin(2 * L);
+      function toDate(j) { return new Date((j + 0.5 - J1970) * DAY); }
+      function at(h) {
+        var w = Math.acos((Math.sin(h * R) - Math.sin(phi) * Math.sin(dec)) / (Math.cos(phi) * Math.cos(dec)));
+        var set = J2000 + J0 + (w + lw) / (2 * Math.PI) + n + 0.0053 * Math.sin(M) - 0.0069 * Math.sin(2 * L);
+        return [toDate(noon - (set - noon)), toDate(set)];
+      }
+      var o = at(-0.833), c = at(-6);
+      return { dawn: c[0], rise: o[0], set: o[1], dusk: c[1] };
+    }
+
+    // Sunrise icon: civil dawn to 30 min after sunrise. Sunset icon: 30 min before sunset to civil dusk.
+    var HALF = 30 * 60 * 1000, cache = null, cacheKey = '';
+    function phase(now) {
+      var key = Math.floor(now / 36e5); // recompute hourly
+      if (key !== cacheKey) { cache = sunTimes(now); cacheKey = key; }
+      var t = now.valueOf(), s = cache;
+      if (t >= s.dawn && t < s.rise.valueOf() + HALF) return 'sunrise';
+      if (t >= s.rise.valueOf() + HALF && t < s.set.valueOf() - HALF) return 'day';
+      if (t >= s.set.valueOf() - HALF && t < s.dusk) return 'sunset';
+      return 'night';
+    }
+    var LABEL = { sunrise: 'Sunrise', day: 'Daytime', sunset: 'Sunset', night: 'Night' };
+
+    function tick() {
+      var now = new Date(), t = {};
+      parts.formatToParts(now).forEach(function (p) { t[p.type] = p.value; });
+      var h = parseInt(t.hour, 10) % 24;
+      el.textContent = (h % 12 || 12) + ':' + t.minute + ':' + t.second + ' ' + (h < 12 ? 'AM' : 'PM');
+      if (sky) {
+        var ph = phase(now);
+        if (sky.getAttribute('data-phase') !== ph) {
+          sky.setAttribute('data-phase', ph);
+          sky.setAttribute('aria-label', LABEL[ph] + ' in Charlotte');
+        }
+        if (wrap) wrap.title = 'Charlotte sunrise ' + short.format(cache.rise) + ' / sunset ' + short.format(cache.set);
+      }
+      setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
+    }
     tick();
-    setInterval(tick, 15000);
   })();
 
   // Scale the wordmark so its widest line fills the grid width exactly.
@@ -337,7 +425,7 @@
     function fit() {
       h.style.fontSize = '100px';
       var widest = 0;
-      h.querySelectorAll('span').forEach(function (s) { widest = Math.max(widest, s.getBoundingClientRect().width); });
+      h.querySelectorAll(':scope > span').forEach(function (s) { widest = Math.max(widest, s.getBoundingClientRect().width); });
       var avail = h.parentElement.clientWidth - 2 * parseFloat(getComputedStyle(h.parentElement).paddingLeft);
       if (widest) h.style.fontSize = (100 * avail / widest * 0.99) + 'px';
     }

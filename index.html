@@ -103,6 +103,10 @@
 
   /* Sections */
   section.block { border-top: var(--rule); }
+  /* Nav jumps land the section's top edge right under the sticky header (its 1px rule tucks under the header's rule) */
+  section[id] { scroll-margin-top: calc(var(--header-h, 47px) - 1px); }
+  /* Last section is at least one screen tall so Contact can also scroll to the top */
+  #contact { min-height: calc(100vh - var(--header-h, 47px) - var(--footer-h, 49px) + 1px); }
   .block .grid { padding-top: 20px; padding-bottom: clamp(64px, 12vh, 160px); row-gap: 28px; }
   .label { grid-column: 1 / span 3; display: flex; gap: 14px; align-items: baseline; }
   .label .n { font-weight: 700; }
@@ -416,6 +420,21 @@
       setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
     }
     tick();
+  })();
+
+  // Keep the anchor offset equal to the sticky header's real height (it changes with fonts and screen size).
+  (function headerOffset() {
+    var top = document.getElementById('top');
+    if (!top) return;
+    var foot = document.querySelector('footer');
+    function set() {
+      var r = document.documentElement.style;
+      r.setProperty('--header-h', top.getBoundingClientRect().height + 'px');
+      if (foot) r.setProperty('--footer-h', foot.getBoundingClientRect().height + 'px');
+    }
+    set();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+    window.addEventListener('resize', set);
   })();
 
   // Scale the wordmark so its widest line fills the grid width exactly.

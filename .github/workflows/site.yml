@@ -1,0 +1,44 @@
+# Publishes the site to GitHub Pages with Charlotte's current weather (National Weather Service, Charlotte Douglas
+# airport) in weather.json. Runs on every push to main, every 30 minutes, and on demand (Actions > Site > Run workflow).
+# Needs one setting: Settings > Pages > Source = "GitHub Actions". No key or secret.
+# Only the site's own files are published (index.html, CNAME, images, js, weather.json); this file, the weather
+# script and the README stay in the repository and are not public pages.
+name: Site
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Collect the site files
+        run: |
+          mkdir _site
+          cp -R index.html CNAME images js _site/
+      - name: Fetch Charlotte weather
+        # If the weather service is down, the site still publishes; the header just hides the weather.
+        continue-on-error: true
+        run: node scripts/weather.mjs _site/weather.json
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v5
